@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.item_android_version.view.*
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(android: AndroidVersion) {
+            //code nothing
             itemView.tv_name.text = android.name
             itemView.tv_version.text = android.ver
             itemView.tv_api_level.text = android.api

@@ -1,8 +1,7 @@
 package com.example.framgiatongxuanan.viblo_shimmer_effect.features
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -17,8 +16,6 @@ import com.example.framgiatongxuanan.viblokolin.features.androidversion.Reposito
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import com.facebook.shimmer.ShimmerFrameLayout
-
 
 
 /**
@@ -27,7 +24,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 class ListAndroidVersionActivity : AppCompatActivity() {
     private val TAG = ListAndroidVersionActivity::class.java.simpleName
     private var mAdapter: AndroidVersionAdapter? = null
-        override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initRecyclerView()
@@ -43,6 +40,7 @@ class ListAndroidVersionActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         shimmer_view_container.stopShimmerAnimation()
+
     }
 
     // khởi tao recyclerview
@@ -72,11 +70,12 @@ class ListAndroidVersionActivity : AppCompatActivity() {
 
     //Xử lí dữ liệu khi request thành công
     private fun handleSuccessAndroidVersion(result: List<AndroidVersion>) {
-        SystemClock.sleep(4000);
-        mAdapter = AndroidVersionAdapter(result)
-        rv_android_list.adapter = mAdapter
-        shimmer_view_container.stopShimmerAnimation()
-        shimmer_view_container.visibility=View.GONE
+        Handler().postDelayed({
+            mAdapter = AndroidVersionAdapter(result)
+            rv_android_list.adapter = mAdapter
+            shimmer_view_container.stopShimmerAnimation()
+            shimmer_view_container.visibility = View.GONE
+        }, 5000)
 
     }
 

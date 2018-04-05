@@ -70,6 +70,7 @@ class ListAndroidVersionActivity : AppCompatActivity() {
 
     //Xử lí dữ liệu khi request thành công
     private fun handleSuccessAndroidVersion(result: List<AndroidVersion>) {
+        /*mình dùng thằng Handler().postDelayed này để delay lại quá trình load xong dữ liệu để các bạn có thể thấy rõ hơn animation*/
         Handler().postDelayed({
             mAdapter = AndroidVersionAdapter(result)
             rv_android_list.adapter = mAdapter
